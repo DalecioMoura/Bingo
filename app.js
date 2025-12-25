@@ -30,6 +30,10 @@ app.get('/sorteio', (req, res) => {
     res.render('sorteio');
 });
 
+app.get('/', (req, res) => {
+    res.render('imprimir');
+})
+
 //app.listen(3000, () => console.log('Bingo rodando em http://localhost:3000/imprimir'));
 
 const PORT = 3000;
