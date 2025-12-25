@@ -1,0 +1,126 @@
+<!--DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Cartela Digital</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #2c3e50; color: white; margin: 0; padding: 10px; }
+        .cartela { 
+            background: white; color: #333; border-radius: 15px; overflow: hidden; 
+            max-width: 400px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        .topo { display: grid; grid-template-columns: repeat(5, 1fr); background: #000; color: #fff; font-size: 24px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); }
+        .celula { 
+            border: 1px solid #ddd; height: 70px; display: flex; align-items: center; 
+            justify-content: center; font-size: 22px; font-weight: bold; cursor: pointer;
+            transition: background 0.3s; -webkit-tap-highlight-color: transparent;
+        }
+        .marcada { background: #27ae60 !important; color: white; }
+        .free { background: #eee; font-size: 12px; }
+        .instrucoes { font-size: 14px; opacity: 0.8; margin-top: 10px; }
+        button { margin-top: 20px; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Minha Cartela</h2>
+    
+    <div class="cartela">
+        <div class="topo"><div>B</div><div>I</div><div>N</div><div>G</div><div>O</div></div>
+        <div class="grid">
+            <% for(let i=0; i<5; i++) { %>
+                <div class="celula" onclick="alternar(this)"><%= cartela.B[i] %></div>
+                <div class="celula" onclick="alternar(this)"><%= cartela.I[i] %></div>
+                <div class="celula <%= i===2 ? 'marcada free' : '' %>" onclick="<%= i===2 ? '' : 'alternar(this)' %>">
+                    <%= i===2 ? 'LIVRE' : cartela.N[i] %>
+                </div>
+                <div class="celula" onclick="alternar(this)"><%= cartela.G[i] %></div>
+                <div class="celula" onclick="alternar(this)"><%= cartela.O[i] %></div>
+            <% } %>
+        </div>
+    </div>
+
+    <p class="instrucoes">Toque no número para marcar ou desmarcar.</p>
+    <button onclick="location.reload()">Gerar Nova Cartela</button>
+    <br><br>
+    <a href="/" style="color: #ecf0f1;">Voltar ao Início</a>
+
+    <script>
+        function alternar(elemento) {
+            const numero = elemento.innerText;
+            const estaMarcado = elemento.classList.contains('marcada');
+            const acao = estaMarcado ? "DESMARCAR" : "MARCAR";
+
+            // Confirmação para evitar toque acidental
+            if (confirm(`Deseja ${acao} o número ${numero}?`)) {
+                elemento.classList.toggle('marcada');
+            }
+        }
+    </script>
+</body>
+</html-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Cartela Digital</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #2c3e50; color: white; margin: 0; padding: 10px; }
+        .cartela { 
+            background: white; color: #333; border-radius: 15px; overflow: hidden; 
+            max-width: 400px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        .topo { display: grid; grid-template-columns: repeat(5, 1fr); background: #000; color: #fff; font-size: 24px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); }
+        .celula { 
+            border: 1px solid #ddd; height: 70px; display: flex; align-items: center; 
+            justify-content: center; font-size: 22px; font-weight: bold; cursor: pointer;
+            transition: background 0.3s; -webkit-tap-highlight-color: transparent;
+        }
+        .marcada { background: #27ae60 !important; color: white; }
+        .free { background: #eee; font-size: 10px; color: #777; }
+        .instrucoes { font-size: 14px; opacity: 0.8; margin-top: 10px; }
+        button { margin-top: 20px; padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; background: #e67e22; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Minha Cartela Digital</h2>
+    
+    <div class="cartela">
+        <div class="topo"><div>B</div><div>I</div><div>N</div><div>G</div><div>O</div></div>
+        <div class="grid">
+            <% for(let i = 0; i < 5; i++) { %>
+                <div class="celula" onclick="alternar(this)"><%= cartela.B[i] %></div>
+                <div class="celula" onclick="alternar(this)"><%= cartela.I[i] %></div>
+                <% if (i === 2) { %>
+                    <div class="celula marcada free">LIVRE</div>
+                <% } else { %>
+                    <div class="celula" onclick="alternar(this)"><%= cartela.N[i] %></div>
+                <% } %>
+                <div class="celula" onclick="alternar(this)"><%= cartela.G[i] %></div>
+                <div class="celula" onclick="alternar(this)"><%= cartela.O[i] %></div>
+            <% } %>
+        </div>
+    </div>
+
+    <p class="instrucoes">Toque no número para marcar ou desmarcar.</p>
+    <button onclick="location.reload()">Gerar Nova Cartela</button>
+    <br><br>
+    <a href="/" style="color: #ecf0f1; text-decoration: none;">← Voltar ao Início</a>
+
+    <script>
+        function alternar(elemento) {
+            const numero = elemento.innerText;
+            const estaMarcado = elemento.classList.contains('marcada');
+            const mensagem = estaMarcado ? `Deseja desmarcar o número ${numero}?` : `Deseja marcar o número ${numero}?`;
+
+            if (confirm(mensagem)) {
+                elemento.classList.toggle('marcada');
+            }
+        }
+    </script>
+</body>
+</html>
